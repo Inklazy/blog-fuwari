@@ -1,0 +1,34 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { getPostUrlBySlug } from "@utils/url-utils";
+import PostCard from "./PostCard.astro";
+
+const { page } = Astro.props;
+
+let delay = 0;
+const interval = 50;
+const hasPosts = page.data.length > 0;
+---
+<div class="transition flex flex-col rounded-[var(--radius-large)] bg-[var(--card-bg)] py-1 md:py-0 md:bg-transparent md:gap-4 mb-4">
+    {hasPosts ? page.data.map((entry: CollectionEntry<"posts">) => (
+        <PostCard
+                entry={entry}
+                title={entry.data.title}
+                tags={entry.data.tags}
+                category={entry.data.category}
+                published={entry.data.published}
+                updated={entry.data.updated}
+                url={getPostUrlBySlug(entry.slug)}
+                image={entry.data.image}
+                description={entry.data.description}
+                draft={entry.data.draft}
+                class:list="onload-animation"
+                style={`animation-delay: calc(var(--content-delay) + ${delay++ * interval}ms);`}
+        ></PostCard>
+    )) : (
+        <div class="card-base flex flex-col items-center justify-center w-full rounded-[var(--radius-large)] px-6 py-14 text-center onload-animation">
+            <div class="font-bold text-xl text-90 mb-2">暂无文章</div>
+            <div class="text-75">文章整理后会出现在这里。</div>
+        </div>
+    )}
+</div>
