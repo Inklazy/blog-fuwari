@@ -97,3 +97,9 @@ Check out the [Contributing Guide](https://github.com/saicaca/fuwari/blob/main/C
 This project is licensed under the MIT License.
 
 [![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fsaicaca%2Ffuwari.svg?type=large&issueType=license)](https://app.fossa.com/projects/git%2Bgithub.com%2Fsaicaca%2Ffuwari?ref=badge_large&issueType=license)
+
+## Personal blog deployment
+
+This blog is maintained at https://github.com/Inklazy/blog-fuwari and published at https://blog.inklazy.com/ through the existing Cloudflare Worker `blog-fuwari`.
+
+Cloudflare builds the `main` branch with `pnpm run build` and deploys with `npx wrangler deploy`. Static assets are generated in `dist/`, and Pagefind search is included in the build. The repository uses `pnpm@9.14.4` as specified in `package.json`.
